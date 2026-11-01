@@ -156,6 +156,8 @@ h2 { font-size: var(--s-xl); font-weight: 700; letter-spacing: -.025em; line-hei
 .stat span { font-size: var(--s-sm); color: var(--ink); }
 .proj .more { margin-top: auto; font-weight: 600; font-size: var(--s-sm); color: var(--accent); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
 .proj .more:hover { text-decoration: underline; }
+.proj .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.proj .links .more { margin-top: 0; }
 @media (max-width: 820px) { .projects { grid-template-columns: 1fr; } .proj.feature { grid-template-columns: 1fr; } }
 
 /* Skills */
@@ -338,19 +340,43 @@ footer .wrap { padding-block: 26px 40px; display: flex; flex-wrap: wrap; justify
       <div class="projects">
         <article class="proj feature">
           <div>
-            <div class="proj-kicker"><span>Audio ML · <span class="en">Recommendation</span><span class="pt">Recomendação</span></span><span class="status done"><span class="en">Featured</span><span class="pt">Destaque</span></span></div>
+            <div class="proj-kicker"><span>NLP · <span class="en">Language model fine-tuning</span><span class="pt">Fine-tuning de modelo de linguagem</span></span><span class="status done"><span class="en">Published on Hugging Face</span><span class="pt">Publicado no Hugging Face</span></span></div>
+            <h3 style="margin-top:10px"><span class="en">Review sentiment with BERTimbau</span><span class="pt">Sentimento em reviews com BERTimbau</span></h3>
+            <p style="margin-top:10px"><span class="en">Fine-tuned BERTimbau to classify 32k real Portuguese customer reviews from Brazilian e-commerce (Olist) as positive or negative, compared it against a TF-IDF baseline and dug into where each model fails.</span><span class="pt">Fine-tuning do BERTimbau para classificar 32 mil reviews reais de clientes do e-commerce brasileiro (Olist) como positivas ou negativas, com comparação contra um baseline TF-IDF e análise de onde cada modelo erra.</span></p>
+            <ul class="points" style="margin-top:14px">
+              <li><span class="en">Negation is the edge: words like "não" appear in 27% of test reviews but in 54% of the cases only BERTimbau got right.</span><span class="pt">Entender negação é o diferencial: palavras como "não" aparecem em 27% das reviews de teste, mas em 54% dos casos que só o BERTimbau acertou.</span></li>
+              <li><span class="en">Error analysis: 13 of the 20 most confident errors shared by both models were mislabeled, such as "não recebi o produto" with a high rating.</span><span class="pt">Análise de erros: 13 dos 20 erros mais confiantes dos dois modelos tinham rótulo errado, como "não recebi o produto" com nota alta.</span></li>
+              <li><span class="en">Leakage-safe data: duplicate texts removed, stopwords kept and a held-out test set used only for the final evaluation.</span><span class="pt">Dados sem vazamento: textos duplicados removidos, stopwords mantidas e conjunto de teste usado só na avaliação final.</span></li>
+            </ul>
+          </div>
+          <div class="proj-side">
+            <div class="stat"><b class="mono">0.907 → 0.933</b><span><span class="en">F1-macro on the held-out test set against the TF-IDF baseline, with 29% fewer errors</span><span class="pt">F1-macro no conjunto de teste contra o baseline TF-IDF, com 29% menos erros</span></span></div>
+            <ul class="tags"><li>Hugging Face Transformers</li><li>BERTimbau</li><li>PyTorch</li><li>scikit-learn</li><li>pandas</li><li>Google Colab</li></ul>
+            <div class="links">
+              <a class="more" href="https://huggingface.co/laisedosdados/bertimbau-sentimento-olist" target="_blank" rel="noopener"><span class="en">View model</span><span class="pt">Ver modelo</span> →</a>
+              <a class="more" href="https://github.com/laisedosdados/Olist-Data-Ecosystem-Do-ETL-An-lise-de-Sentimentos" target="_blank" rel="noopener"><span class="en">View repository</span><span class="pt">Ver repositório</span> →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="proj feature">
+          <div>
+            <div class="proj-kicker"><span>Audio ML · <span class="en">Recommendation</span><span class="pt">Recomendação</span></span><span class="status done"><span class="en">Live app</span><span class="pt">App no ar</span></span></div>
             <h3 style="margin-top:10px">Sintonia</h3>
             <p style="margin-top:10px"><span class="en">Finds what draws you to a song (melody, voice, rhythm, harmony or sound) and recommends others that share it, explaining each match in plain Portuguese.</span><span class="pt">Descobre o que te atrai numa música (melodia, voz, ritmo, harmonia ou som) e recomenda outras com a mesma característica, explicando cada sugestão em português simples.</span></p>
             <ul class="points" style="margin-top:14px">
-              <li><span class="en">Source separation with Demucs: voice, instruments and beat analyzed separately.</span><span class="pt">Separação de fontes com Demucs: voz, instrumentos e batida analisados separadamente.</span></li>
-              <li><span class="en">Weighted cosine similarity per aspect, driven by the listener's choices.</span><span class="pt">Similaridade de cosseno ponderada por aspecto, guiada pelas escolhas de quem ouve.</span></li>
-              <li><span class="en">Package structure, SQLite catalog and pytest suite with synthetic audio.</span><span class="pt">Código em pacote, catálogo em SQLite e testes com pytest usando áudio sintético.</span></li>
+              <li><span class="en">Deep learning on audio: Demucs splits each song into voice, instruments and beat, and Whisper detects the language from the isolated vocals.</span><span class="pt">Deep learning em áudio: o Demucs separa cada música em voz, instrumentos e batida, e o Whisper detecta o idioma pela voz isolada.</span></li>
+              <li><span class="en">End-to-end pipeline: Deezer and Jamendo APIs, librosa features, a 650-song SQLite catalog and weighted cosine similarity per aspect.</span><span class="pt">Pipeline de ponta a ponta: APIs do Deezer e do Jamendo, features com librosa, catálogo de 650 músicas em SQLite e similaridade de cosseno ponderada por aspecto.</span></li>
+              <li><span class="en">Streamlit app, pytest suite with synthetic audio and a GitHub Actions job that enriches the catalog.</span><span class="pt">App em Streamlit, testes com pytest usando áudio sintético e um job no GitHub Actions que enriquece o catálogo.</span></li>
             </ul>
           </div>
           <div class="proj-side">
             <div class="stat"><b class="mono">0.004</b><span><span class="en">distance between the same melody sung higher (vs 4.8 for a different melody): key-invariant by design</span><span class="pt">distância entre a mesma melodia cantada mais aguda (contra 4,8 de uma melodia diferente): invariante ao tom</span></span></div>
-            <ul class="tags"><li>Python</li><li>Demucs</li><li>librosa</li><li>scikit-learn</li><li>SQLite</li><li>Streamlit</li><li>pytest</li></ul>
-            <a class="more" href="https://github.com/laisedosdados/sintonia" target="_blank" rel="noopener"><span class="en">View repository</span><span class="pt">Ver repositório</span> →</a>
+            <ul class="tags"><li>Python</li><li>Demucs</li><li>Whisper</li><li>librosa</li><li>SQLite</li><li>Streamlit</li><li>pytest</li><li>GitHub Actions</li></ul>
+            <div class="links">
+              <a class="more" href="https://sintonia-laise.streamlit.app/" target="_blank" rel="noopener"><span class="en">Open the app</span><span class="pt">Abrir o app</span> →</a>
+              <a class="more" href="https://github.com/laisedosdados/sintonia" target="_blank" rel="noopener"><span class="en">View repository</span><span class="pt">Ver repositório</span> →</a>
+            </div>
           </div>
         </article>
 
@@ -374,18 +400,6 @@ footer .wrap { padding-block: 26px 40px; display: flex; flex-wrap: wrap; justify
           <ul class="tags"><li>scikit-learn</li><li>imbalanced-learn</li><li>pandas</li><li>Seaborn</li></ul>
           <a class="more" href="https://github.com/laisedosdados/Multiple-Sclerosis-Analysis" target="_blank" rel="noopener"><span class="en">View repository</span><span class="pt">Ver repositório</span> →</a>
         </article>
-
-        <article class="proj">
-          <div class="proj-kicker"><span>NLP · E-commerce</span><span class="status wip"><span class="en">In progress</span><span class="pt">Em andamento</span></span></div>
-          <h3>Olist Reviews &amp; Delivery</h3>
-          <p><span class="en">Brazilian e-commerce data, from ETL across 9 relational tables to delivery-delay prediction and sentiment analysis of Portuguese customer reviews.</span><span class="pt">Dados do e-commerce brasileiro: do ETL de 9 tabelas relacionais à previsão de atraso de entrega e análise de sentimentos em avaliações em português.</span></p>
-          <ul class="points">
-            <li><span class="en">Done: ETL and unification of the 9 tables.</span><span class="pt">Concluído: ETL e unificação das 9 tabelas.</span></li>
-            <li><span class="en">Next: delay model and transformer-based review classification.</span><span class="pt">Próximo: modelo de atraso e classificação de avaliações com transformers.</span></li>
-          </ul>
-          <ul class="tags"><li>pandas</li><li>SQL</li><li>NLP</li><li>scikit-learn</li></ul>
-          <a class="more" href="https://github.com/laisedosdados/Olist-Data-Ecosystem-Do-ETL-An-lise-de-Sentimentos" target="_blank" rel="noopener"><span class="en">View repository</span><span class="pt">Ver repositório</span> →</a>
-        </article>
       </div>
     </div>
   </section>
@@ -398,7 +412,7 @@ footer .wrap { padding-block: 26px 40px; display: flex; flex-wrap: wrap; justify
           <div class="skills">
             <div class="skill">
               <h3>Machine Learning &amp; AI</h3>
-              <ul class="tags"><li>scikit-learn</li><li>Random Forest</li><li>LASSO</li><li>SMOTE</li><li>Feature importance</li><li>AUC · <span class="en">sensitivity</span><span class="pt">sensibilidade</span></li><li>Demucs</li></ul>
+              <ul class="tags"><li>Hugging Face Transformers</li><li>Fine-tuning (BERTimbau)</li><li>PyTorch</li><li>Whisper</li><li>scikit-learn</li><li>Random Forest</li><li>LASSO</li><li>SMOTE</li><li>Feature importance</li><li>AUC · <span class="en">sensitivity</span><span class="pt">sensibilidade</span></li><li>Demucs</li></ul>
             </div>
             <div class="skill">
               <h3><span class="en">Data engineering</span><span class="pt">Engenharia de dados</span></h3>
